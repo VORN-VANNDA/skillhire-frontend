@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+/*
+  SkillHire design tokens.
+  Navy is the base ink/paper pair (deep navy + white); gold marks the primary highlight
+  (progress, badges, the logo mark), cyan is the secondary accent
+  used for links and confirmed states.
+*/
+@theme {
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "Public Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --color-navy: #0b1e36;
+  --color-navy-soft: #162e4a;
+  --color-navy-line: #2c4566;
+
+  --color-paper: #ffffff;
+  --color-paper-dim: #f5f6fa;
+  --color-line: #e3e6ee;
+
+  --color-gold: #ff9f1c;
+  --color-gold-deep: #e6a100;
+  --color-cyan: #00b4d8;
+  --color-cyan-deep: #0096c7;
+  --color-danger: #c4433a;
+  --color-danger-bg: #fbeae8;
+
+  --color-muted: #64748b;
+  --color-muted-on-navy: #a3aecb;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    color-scheme: light;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-paper);
+    color: var(--color-navy);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-navy);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  /* Deep, flowing water: a slow-drifting gradient of navy with cyan and
+     gold light glowing through it. Used as the auth shell's full-bleed
+     background instead of a flat panel. */
+  .bg-water {
+    background-image:
+      radial-gradient(1200px 800px at 18% 15%, rgba(0, 180, 216, 0.38), transparent 58%),
+      radial-gradient(800px 700px at 20% 95%, rgba(255, 159, 28, 0.28), transparent 55%),
+      radial-gradient(700px 500px at 75% 30%, rgba(0, 180, 216, 0.14), transparent 60%),
+      linear-gradient(160deg, #0b1e36 0%, #14294a 55%, #0e2340 100%);
+    background-size: 150% 150%;
+    animation: water-drift 24s ease-in-out infinite alternate;
+  }
+
+  /* Same idea, much quieter — for light, authenticated pages. */
+  .bg-water-light {
+    background-image:
+      radial-gradient(900px 600px at 6% -5%, rgba(0, 180, 216, 0.09), transparent 60%),
+      radial-gradient(700px 500px at 96% 105%, rgba(255, 159, 28, 0.08), transparent 55%),
+      linear-gradient(180deg, #f7f8fb 0%, #f2f4f8 100%);
+  }
+}
+
+@keyframes water-drift {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
